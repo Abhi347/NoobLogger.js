@@ -1,0 +1,23 @@
+{
+  "name": "@logkat/logger",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "node ./debug/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Abhi347/LogKatLogger.js.git"
+  },
+  "keywords": ["logger", "logging", "noob", "lumberjack", "logkat"],
+  "author": "Abhishek Jain (http://noobguy.logkat.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Abhi347/LogKatLogger.js/issues"
+  },
+  "homepage": "https://github.com/Abhi347/LogKatLogger.js#readme",
+  "dependencies": {
+    "colors": "^1.2.1"
+  }
+}
