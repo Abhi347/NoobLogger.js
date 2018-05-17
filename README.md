@@ -27,11 +27,11 @@ It's easy to start and ever easier to customise.
 Following methods are available as per the log levels
 
     const logkat = require('@logkat/logger');
-    logkat.verbose(message);
-    logkat.log(message); //or logkat.debug(message);
-    logkat.info(message);
-    logkat.warn(message);
-    logkat.error(message);
+    logkat.verbose(message); //or logkat.v(message);
+    logkat.log(message); //or logkat.debug(message); or or logkat.d(message);
+    logkat.info(message); //or logkat.i(message);
+    logkat.warn(message); //or logkat.w(message);
+    logkat.error(message); //or logkat.e(message);
 
 You can set Log Filtering by choosing the required Log Level -
 
@@ -40,6 +40,15 @@ You can set Log Filtering by choosing the required Log Level -
 Or you can choose to disable all logging
 
     logkat.setLogLevel('prod');
+
+You can break through the levels by always logging the text using the options parameter
+
+    logkat.log('This will log, no matter what',{force:true});
+
+You can also specify whether you want to stringify an object on logging.
+
+    logkat.log(someObject,{stringify:true});
+
 
 ## Advanced Usage
 
@@ -52,6 +61,8 @@ The default options are defined as
     const DEFAULT_OPTIONS = {
         logLevel: 'debug', //verbose,debug, info, error, prod
         error: {
+            level: 'error',
+            force: false,
             showStack: false,
             showDebug: true
         },
