@@ -31,7 +31,7 @@ setDefault();
 
 function init(options) {
   if (options.logLevel) {
-    if (LOG_LEVEL_VALUES.keys().indexOf(options.logLevel) !== -1) {
+    if (Object.keys(LOG_LEVEL_VALUES).indexOf(options.logLevel) !== -1) {
       loggingOptions.logLevel = options.logLevel;
     }
   }
