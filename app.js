@@ -1,5 +1,7 @@
 const colors = require('colors');
 
+/* eslint no-console:0 */
+
 const LOG_LEVEL_VALUES = {
   prod: -1,
   error: 0,
@@ -44,7 +46,7 @@ function init(options) {
     }
   }
   if (options.colorTheme) {
-    for (prop in loggingOptions.colorTheme) {
+    for (const prop in loggingOptions.colorTheme) {
       let newColor = options.colorTheme[prop];
       if (newColor) {
         loggingOptions.colorTheme[prop] = newColor;
@@ -122,6 +124,7 @@ function verbose(msg, options = {}) {
 module.exports = {
   init: init,
   setDefault: setDefault,
+  setLogLevel: setLogLevel,
   log: debug, //debug
   debug: debug, //debug
   error: error, //error
