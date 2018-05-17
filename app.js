@@ -12,6 +12,8 @@ const LOG_LEVEL_VALUES = {
 const DEFAULT_OPTIONS = {
   logLevel: 'debug', //verbose,debug, info, error, prod
   error: {
+    level: 'error',
+    force: false,
     showStack: false,
     showDebug: true
   },
@@ -65,58 +67,70 @@ function setLogLevel(logLevel) {
 function checkLevel(level) {
   return LOG_LEVEL_VALUES[level] <= LOG_LEVEL_VALUES[loggingOptions.logLevel];
 }
-function write(msg, level, stringify = false) {
-  if (checkLevel(level)) {
-    if (stringify) {
+function write(msg, options) {
+  const defaultOptions = {
+    level: 'verbose',
+    stringify: false,
+    force: false
+  };
+  options = { ...defaultOptions, ...loggingOptions, ...options };
+  if (options.force || checkLevel(options.level)) {
+    if (options.stringify) {
       msg = JSON.stringify(msg);
     }
     if (typeof msg === 'string') {
-      msg = msg[level];
+      msg = msg[options.level];
     }
     console.log(msg);
   }
 }
-function error(err) {
-  if (checkLevel('error')) {
+function error(err, options = {}) {
+  options = { ...DEFAULT_OPTIONS.error, ...options };
+  if (options.force || checkLevel(options.level)) {
     if (err.constructor.name === 'String') {
       console.error(err.red);
     } else {
       console.error(err);
-    }
-    if (err.stack && loggingOptions.showStack) {
-      console.log(err.stack.red);
-    }
-    if (err.debug && loggingOptions.showDebug) {
-      console.log(err.debug.warn);
+      if (err.stack && options.showStack) {
+        console.log(err.stack.red);
+      }
+      if (err.debug && options.showDebug) {
+        console.log(err.debug.warn);
+      }
     }
   }
 }
 
-function log(msg, stringify = false) {
-  write(msg, 'debug', stringify);
+function debug(msg, options = {}) {
+  options.level = 'debug';
+  write(msg, options);
 }
 
-function debug(msg, stringify = false) {
-  log(msg, stringify);
+function warn(msg, options = {}) {
+  options.level = 'warn';
+  write(msg, options);
 }
-
-function warn(msg, stringify = false) {
-  write(msg, 'warn', stringify);
+function info(msg, options = {}) {
+  options.level = 'info';
+  write(msg, options);
 }
-function info(msg, stringify = false) {
-  write(msg, 'info', stringify);
-}
-function verbose(msg, stringify = false) {
-  write(msg, 'verbose', stringify);
+function verbose(msg, options = {}) {
+  options.level = 'verbose';
+  write(msg, options);
 }
 //endregion console loggers
 module.exports = {
   init: init,
   setDefault: setDefault,
-  log: log, //debug
+  log: debug, //debug
   debug: debug, //debug
   error: error, //error
   warn: warn, //warn
   info: info, //info
-  verbose: verbose //verbose
+  verbose: verbose, //verbose
+  d: debug, //debug
+  e: error, //error
+  w: warn, //warn
+  i: info, //info
+  v: verbose //verbose
 };
