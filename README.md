@@ -10,6 +10,7 @@ It's easy to start and ever easier to customise.
 * Easy customisation
 * Log only when a specified log level filter is satisfied
 * Can programmatically disable the logs
+* TypeScript support
 
 ## Planned feature
 

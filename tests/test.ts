@@ -1,8 +1,11 @@
-let logger = require('../app');
+import { blue } from 'colors';
+
+import logger from '../app';
+
 logger.init({
   colorTheme: {
-    warn: 'blue'
-  }
+    warn: blue,
+  },
 });
 logger.verbose('verbose');
 logger.log('debug');

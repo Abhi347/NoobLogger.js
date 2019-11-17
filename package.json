@@ -1,16 +1,26 @@
 {
   "name": "@logkat/logger",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "",
-  "main": "app.js",
+  "main": "app.ts",
   "scripts": {
-    "test": "node ./test/test.js"
+    "tsc": "tsc",
+    "ts-node": "ts-node",
+    "test": "ts-node-dev ./tests/test.ts",
+    "echo": "echo 'here' ",
+    "build": "tsc && echo 'here' && node ./tests/test.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Abhi347/LogKatLogger.js.git"
   },
-  "keywords": ["logger", "logging", "noob", "lumberjack", "logkat"],
+  "keywords": [
+    "logger",
+    "logging",
+    "noob",
+    "lumberjack",
+    "logkat"
+  ],
   "author": "Abhishek Jain (http://noobguy.logkat.com/)",
   "license": "MIT",
   "bugs": {
@@ -19,5 +29,10 @@
   "homepage": "https://github.com/Abhi347/LogKatLogger.js#readme",
   "dependencies": {
     "colors": "^1.2.1"
+  },
+  "devDependencies": {
+    "ts-node": "^8.5.2",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.7.2"
   }
 }
